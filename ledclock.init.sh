@@ -14,9 +14,9 @@
 # http://blog.scphillips.com/posts/2013/07/getting-a-python-script-to-run-in-the-background-as-a-service-on-boot/
 
 # INSTALL:
-# /root/prod/ledclock/ledclock.init.sh
-# /root/prod/ledclock/ledclock.py
-# sudo cp -a /root/prod/ledclock/ledclock.init.sh /etc/init.d/ledclock
+# /home/jdg/prod/ledclock/ledclock.init.sh
+# /home/jdg/prod/ledclock/ledclock.py
+# sudo cp -a /home/jdg/prod/ledclock/ledclock.init.sh /etc/init.d/ledclock
 # sudo update-rc.d ledclock defaults
 # USAGE:
 # sudo /etc/init.d/ledclock start
@@ -26,11 +26,11 @@ ID=`/usr/bin/id -u`
 [[ $ID -ne 0 ]] && echo "Run this command as root" && exit 1
 
 # Change the next 3 lines to suit where you install your script and what you want to call it
-# /root/prod/ledclock/ledclock.py
-HOME=/root/prod/ledclock
+HOME=/home/jdg/prod/ledclock
 #
 # DAEMON=$HOME/ledclock.py
-DAEMON=$HOME/sevensegment_clock.py
+#DAEMON=$HOME/sevensegment_clock.py
+DAEMON=$HOME/ledclock.sh
 #
 DAEMON_NAME=ledclock
 

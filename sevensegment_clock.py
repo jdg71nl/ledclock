@@ -3,6 +3,10 @@
 #
 # SPDX-License-Identifier: MIT
 
+# install on Debian:
+# sudo apt install -y python3-pip python3-smbus 
+# pip3 install adafruit-circuitpython-ht16k33
+
 import time
 import datetime
 from adafruit_ht16k33 import segments

@@ -1,0 +1,45 @@
+# INSTALL
+
+# PiRTC:
+sudo apt-get install python3-smbus i2c-tools
+
+> sudo i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- 68 -- -- -- -- -- -- -- 
+70: 70 -- -- -- -- -- -- --                         
+
+; add in /boot/config.txt
+dtoverlay=i2c-rtc,ds3231
+
+sudo update-rc.d -f fake-hwclock remove
+sudo systemctl disable fake-hwclock
+sudo apt-get -y remove fake-hwclock
+
+; sudo vi /lib/udev/hwclock-set 
+; comment out these lines:
+#jg
+##if [ -e /run/systemd/system ] ; then
+##    exit 0
+##fi
+##/sbin/hwclock --rtc=$dev --systz
+
+; then read/write
+sudo hwclock -r
+sudo hwclock -w
+
+# LED 7-segment:
+wget https://raw.githubusercontent.com/adafruit/Adafruit_Learning_System_Guides/main/Matrix_7-Segment_LED_Backpack_Raspberry_Pi/sevensegment_clock/code.py
+mv code.py sevensegment_clock.py          
+python3 ./sevensegment_clock.py 
+
+sudo apt install -y python3-pip python3-smbus 
+pip3 install adafruit-circuitpython-ht16k33
+
+#-eof
+
