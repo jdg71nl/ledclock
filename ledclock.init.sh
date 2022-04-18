@@ -16,11 +16,11 @@
 # INSTALL:
 # /home/jdg/prod/ledclock/ledclock.init.sh
 # /home/jdg/prod/ledclock/ledclock.py
+# sudo /etc/init.d/ledclock stop
+# sudo update-rc.d ledclock remove
 # sudo cp -a /home/jdg/prod/ledclock/ledclock.init.sh /etc/init.d/ledclock
 # sudo update-rc.d ledclock defaults
-# USAGE:
 # sudo /etc/init.d/ledclock start
-# sudo /etc/init.d/ledclock stop
 
 ID=`/usr/bin/id -u`
 [[ $ID -ne 0 ]] && echo "Run this command as root" && exit 1
@@ -30,7 +30,8 @@ HOME=/home/jdg/prod/ledclock
 #
 # DAEMON=$HOME/ledclock.py
 #DAEMON=$HOME/sevensegment_clock.py
-DAEMON=$HOME/ledclock.sh
+#DAEMON=$HOME/ledclock.sh
+DAEMON=$HOME/ledclock.py
 #
 DAEMON_NAME=ledclock
 
