@@ -61,6 +61,30 @@ display = segments.BigSeg7x4(i2c)
 # clear display
 display.fill(0)
 
+# jdg
+# "You can set the brightness of the display, but changing it will set the brightness of the entire display and not individual segments. If can be adjusted in 1/16 increments between 0 and 1.0 with 1.0 being the brightest."
+#display.brightness = 0.0
+#display.brightness = 1.0
+#display.brightness = 0.0 + 1/15 * step // step 0..15 // 0.15 = 0.0666667
+#
+def set_brightness(bstep):
+  display.brightness = 0.0 + bstep / 15.0
+#
+#
+import json
+def read_bstep() -> int:
+  fh = open('bstep.json')
+  data = json.load(fh)
+  bstep = int(data['bstep'])
+  #bstep = data['bstep']
+  fh.close();
+  #print("# bstep={}".format(bstep))
+  return bstep
+#
+#
+bstep = read_bstep()
+set_brightness(bstep)
+
 import os
 import subprocess
 command = "./ntpq-print-offset.sh"
