@@ -72,8 +72,9 @@ def set_brightness(bstep):
 #
 #
 import json
+bstep_file = "/home/jdg/prod/ledclock/bstep.json"
 def read_bstep() -> int:
-  fh = open('bstep.json')
+  fh = open(bstep_file)
   data = json.load(fh)
   bstep = int(data['bstep'])
   #bstep = data['bstep']
@@ -101,6 +102,11 @@ treshhold_time = 10
 sleep_time = 0.5
 
 while True:
+
+    #
+    bstep = read_bstep()
+    set_brightness(bstep)
+
     # get system time
     now = datetime.datetime.now()
     hour = now.hour
