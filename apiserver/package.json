@@ -1,0 +1,38 @@
+{
+  "name": "ledclockapi",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "_comment_0": " // SemVer: Major.Minor.Patch ",
+  "_comment_1": " // carot^ like in '^6.Minor.Patch' is same as '6.x'   and means => I want latest version with fixed Major==6         ",
+  "_comment_2": " // tilde~ like in '~1.9.Patch'     is same as '1.9.x' and means => I want latest version with fixed Major.Minor==1.9 ",
+  "_comment_3": " // > npm outdated                      <== show Current, Wanted and Latest ",
+  "_comment_4": " // > npm update                        <== to update to Wanted versions",
+  "_comment_5": " // > sudo npm i npm-check-updates -g   <== then run:    > ncu   <== to see any newer version (beyond carot^ and tilde~) ",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "chokidar": "^3.5.2",
+    "config": "^3.3.7",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-basic-auth": "^1.2.0",
+    "fs-extra": "^10.0.0",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.2",
+    "jsdom": "^17.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.1",
+    "mqtt": "^4.3.4",
+    "nano": "^9.0.5",
+    "root-require": "^0.3.1",
+    "socket.io": "^4.4.1",
+    "sprintf-js": "^1.1.2",
+    "text-decoding": "^1.0.0",
+    "util": "^0.12.4",
+    "web-encoding": "^1.1.5"
+  }
+}

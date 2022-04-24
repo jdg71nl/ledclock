@@ -1,3 +1,4 @@
 {
-  "prod_dir": "/home/jdg/prod/ledclock"
+  "prod_dir": "/home/jdg/prod/ledclock",
+  "dev_dir" : "/home/jdg/dev/ledclock"
 }

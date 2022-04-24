@@ -7,13 +7,17 @@ if [ ! -f $CONF ]; then
   exit 1
 fi
 #
-DIR=$(cat $CONF| jq '.prod_dir' | sed 's/"//g')
-if [ -d $DIR ]; then
-  echo "# directory '$DIR' already exists"
+DEV_DIR=$(cat $CONF| jq '.dev_dir' | sed 's/"//g')
+PROD_DIR=$(cat $CONF| jq '.prod_dir' | sed 's/"//g')
+#
+if [ -d $PROD_DIR ]; then
+  echo "# directory '$PROD_DIR' already exists"
 else
-  mkdir -pv $DIR
+  mkdir -pv $PROD_DIR
 fi
 #
-cp -av * $DIR
+#cp -av * $PROD_DIR
+#
+rsync -rtv --links --exclude '.git/' $DEV_DIR/ $PROD_DIR/
 #
 #-EOF

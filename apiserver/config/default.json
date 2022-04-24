@@ -1,0 +1,20 @@
+{
+  "CONFIG_APP_VERSION":         "0.1.0",
+  "CONFIG_APP_SERVERNAME":      "ledclockapi",
+  "CONFIG_APP_PORT":            8080,
+
+  "CONFIG_MONGODB_URL":         "mongodb://localhost",
+  "CONFIG_MONGODB_DBNAME":      "tokenme",
+  "###_CONFIG_MONGODB_HOST":      "localhost",
+  "###_CONFIG_MONGODB_PORT":      "27017",
+  "###_CONFIG_MONGODB_USERNAME":  "",
+  "###_CONFIG_MONGODB_PASSWORD":  "",
+
+  "###_CONFIG_COUCHDB_URL":         "",
+  "###_CONFIG_COUCHDB_PROT":        "http",
+  "###_CONFIG_COUCHDB_HOST":        "localhost",
+  "###_CONFIG_COUCHDB_PORT":        "5984",
+  "###_CONFIG_COUCHDB_USER":        "",
+  "###_CONFIG_COUCHDB_PASSWORD":    ""
+
+}

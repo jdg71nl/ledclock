@@ -1,0 +1,118 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+// d220218 JDG: BIG CHANGE >> !!! we replace this local 'server' with the 'http_server' from app.js where we bound it to socket.io !!! <<
+// idea from: 
+// https://ourcodeworld.com/articles/read/272/how-to-use-socket-io-properly-with-express-framework-in-node-js
+// "Note: to start the server by itself, the listen method needs to be executed from the server variable, not the app itself. You need to understand this to prevent known errors like "SocketIO: err_connection_refused". "
+
+// var app = require('../app').app;
+const { app, http_server } = require('../app');
+// const { app }                 = require('../app');
+// const { http_server }         = require('../lib/socket_io');
+//
+var debug = require('debug')('dashboard:server');
+// var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+//  var port = normalizePort(process.env.PORT || '3300');
+// var port = normalizePort(process.env.PORT || '8017');
+// var port = normalizePort(process.env.PORT || '8180');
+//
+const config = require('config');
+var port = normalizePort( config.get("CONFIG_APP_PORT") );
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+// var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+// server.listen(port);
+// server.on('error', onError);
+// server.on('listening', onListening);
+
+http_server.listen(port);
+http_server.on('error', onError);
+http_server.on('listening', onListening);
+
+// // https://doc.scalingo.com/languages/nodejs/websocket-web-same-port
+// http.listen(process.env.PORT || 3000, function() {
+//   var host = http.address().address
+//   var port = http.address().port
+//   console.log('App listening at http://%s:%s', host, port)
+// });
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  //
+  // var addr = server.address();
+  var addr = http_server.address();
+  
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
