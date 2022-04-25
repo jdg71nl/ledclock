@@ -50,24 +50,24 @@ var cookieParser = require('cookie-parser');
 const require_express = require('express');
 const app = require_express();
 
-// socket.io
-// guide => https://socket.io/
-//
-// on client default used: <script src="/socket.io/socket.io.js"></script>    // see also: https://socket.io/docs/v4/client-installation/#standalone-build
-// const socketio_path = '/socket.io/';
-// const socketio_path = '/api/sys-socketio/';
-const socketio_path = '/sock/sys-socketio/';
-// const socketio_path = '/api/sys-socketio';
-console.log("# socketio_path = ", socketio_path);
-//
+// // socket.io
+// // guide => https://socket.io/
+// //
+// // on client default used: <script src="/socket.io/socket.io.js"></script>    // see also: https://socket.io/docs/v4/client-installation/#standalone-build
+// // const socketio_path = '/socket.io/';
+// // const socketio_path = '/api/sys-socketio/';
+// const socketio_path = '/sock/sys-socketio/';
+// // const socketio_path = '/api/sys-socketio';
+// console.log("# socketio_path = ", socketio_path);
+// //
 const http_obj = require('http');
 const http_server = http_obj.createServer(app);
-const { Server } = require("socket.io");   // npm install socket.io --save
-const socketio_server_options = {   // https://socket.io/docs/v4/server-options/
-  path: socketio_path
-};
-// const socket_io = new Server(http_server);
-const socket_io = new Server(http_server, socketio_server_options);
+// const { Server } = require("socket.io");   // npm install socket.io --save
+// const socketio_server_options = {   // https://socket.io/docs/v4/server-options/
+//   path: socketio_path
+// };
+// // const socket_io = new Server(http_server);
+// const socket_io = new Server(http_server, socketio_server_options);
 //
 // idea from: https://ourcodeworld.com/articles/read/272/how-to-use-socket-io-properly-with-express-framework-in-node-js
 // app.use('/api/static', require_express.static('node_modules')); // this works: > curl http://cloud.i.sostark.nl:8052/api/static/socket.io/client-dist/socket.io.min.js
@@ -84,7 +84,9 @@ const socket_io = new Server(http_server, socketio_server_options);
 //
 const pub_path = path.join(__dirname, 'public');
 console.log("# pub_path = ", pub_path);   // # pub_path =  /mnt/vdb1/home/jdg/dev/TokenMe-API-Server/src/public
-app.use('/api/public/test_1e52', require_express.static( pub_path+'/test_1e52' ));    // this works: http://cloud.i.sostark.nl:8052/api/public/test_1e52/chat.html
+app.use(require_express.static(pub_path));
+//
+// app.use('/api/public/test_1e52', require_express.static( pub_path+'/test_1e52' ));    // this works: http://cloud.i.sostark.nl:8052/api/public/test_1e52/chat.html
 //
 // # this code in 'public/test_1e52/chat.html' works:
 // <script src="/api/sys-socketio/socket.io.min.js"></script>
@@ -114,38 +116,38 @@ app.use('/api/public/test_1e52', require_express.static( pub_path+'/test_1e52' )
 let connected = false;
 let do_refresh = false;
 
-// socket_io.on('connection', (socket, {client_id}) => {
-socket_io.on('connection', (socket) => {
-  console.log(`# socket_io: new connection.`);
-  // console.log(`# socket_io: new connection (client_id="${client_id}").`);
-  //
-  socket.on('disconnect', () => {
-    console.log('# socket_io: disconnected');
-  });
-  //
-  // keep (OOB) for testing:
-  socket.on('socketio_new_chat_message', (msg) => {
-    console.log('message: ' + msg);
-    socket_io.emit('socketio_update_chat_message', msg);
-  });
-  //
-  socket.on('webui_connect_req', ({client_id}) => {
-    console.log(`# socket_io: webui_connect_req (client_id="${client_id}").`);
-    connected = true;
-    socket_io.emit('webui_connect_ack', {
-      connected: connected
-    });
-  });
-  //
-});
+// // socket_io.on('connection', (socket, {client_id}) => {
+// socket_io.on('connection', (socket) => {
+//   console.log(`# socket_io: new connection.`);
+//   // console.log(`# socket_io: new connection (client_id="${client_id}").`);
+//   //
+//   socket.on('disconnect', () => {
+//     console.log('# socket_io: disconnected');
+//   });
+//   //
+//   // keep (OOB) for testing:
+//   socket.on('socketio_new_chat_message', (msg) => {
+//     console.log('message: ' + msg);
+//     socket_io.emit('socketio_update_chat_message', msg);
+//   });
+//   //
+//   socket.on('webui_connect_req', ({client_id}) => {
+//     console.log(`# socket_io: webui_connect_req (client_id="${client_id}").`);
+//     connected = true;
+//     socket_io.emit('webui_connect_ack', {
+//       connected: connected
+//     });
+//   });
+//   //
+// });
 
-// const f_socket_io_emit_api_do_refresh = () => {
-//   socket_io.emit('api_do_refresh');
+// // const f_socket_io_emit_api_do_refresh = () => {
+// //   socket_io.emit('api_do_refresh');
+// // };
+
+// function get_socket_io() {
+//   return socket_io;
 // };
-
-function get_socket_io() {
-  return socket_io;
-};
 
 // https://lodash.com/
 // Functional programming (FP) guide
@@ -199,7 +201,7 @@ const {parse_query_set_meta_middleware, f_set_meta_dbconn } = require('./lib/met
 // ;
 // //
 
-var indexRouter = require('./routes/index').router;
+// var indexRouter = require('./routes/index').router;
 // const reportRouter    = require('./routes/reports').router;
 // const timepointRouter = require('./routes/timepoints').router;
 // const anchorRouter    = require('./routes/anchors').router;
@@ -858,7 +860,7 @@ module.exports = {
   http_server:  http_server,   // is picked-up in ./bin/www
   // socket_io:    socket_io,
   // f_socket_io_emit_api_do_refresh: f_socket_io_emit_api_do_refresh,
-  get_socket_io: get_socket_io,
+  // get_socket_io: get_socket_io,
 }; 
 
 // ------+++------ = ------+++------ = ------+++------ = ------+++------ = ------+++------ = ------+++------ = ------+++------ = ------+++------ = ------+++------

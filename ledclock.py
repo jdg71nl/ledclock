@@ -67,7 +67,14 @@ display.fill(0)
 #display.brightness = 1.0
 #display.brightness = 0.0 + 1/15 * step // step 0..15 // 0.15 = 0.0666667
 #
-def set_brightness(bstep):
+def set_brightness(bs):
+  bstep = bs
+  if bstep < 0.0 :
+    bstep = 0.0
+  #
+  if bstep > 15.0 :
+    bstep = 15.0
+  #
   display.brightness = 0.0 + bstep / 15.0
 #
 #
