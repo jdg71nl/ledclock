@@ -52,8 +52,8 @@ def set_brightness(bs):
 #
 #
 import json
-#bstep_file = "/home/jdg/prod/ledclock/bstep.json"
-bstep_file = "/home/jdg/dev/ledclock/bstep.json"
+bstep_file = "/home/jdg/prod/ledclock/bstep.json"
+#bstep_file = "/home/jdg/dev/ledclock/bstep.json"
 def read_bstep() -> int:
   #
   #fh = open(bstep_file)

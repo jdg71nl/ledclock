@@ -59,7 +59,14 @@ i2c = busio.I2C(board.SCL, board.SDA)
 ## display = segments.Seg7x4(i2c, address=0x70)
 ## display = segments.Seg7x4(i2c, address=0x71)
 ## display = segments.Seg7x4(i2c, address=0x72)
-display = segments.BigSeg7x4(i2c)
+#
+# d250306
+# https://docs.circuitpython.org/projects/ht16k33/en/3.2.0/_modules/adafruit_ht16k33/segments.html
+# ...
+# display = segments.BigSeg7x4(i2c)
+display = segments.BigSeg7x4(i2c, address=0x70)
+# display = segments.BigSeg7x4(i2c, address=0x70, auto_write=True)
+# display = segments.BigSeg7x4(i2c, address=0x70, auto_write=False)
 
 #display.bottom_left_dot(True)
 #display.top_left_dot(True)
@@ -68,6 +75,9 @@ display = segments.BigSeg7x4(i2c)
 
 # clear display
 display.fill(0)
+
+# https://docs.circuitpython.org/projects/ht16k33/en/stable/api.html
+#display.auto_write(1)
 
 # jdg
 # "You can set the brightness of the display, but changing it will set the brightness of the entire display and not individual segments. If can be adjusted in 1/16 increments between 0 and 1.0 with 1.0 being the brightest."
@@ -145,18 +155,18 @@ while True:
     #display.print(clock)
 
 
-#:     #display.top_left_dot = GPIO.input(pin)
-#:     #
-#:     if GPIO.input(pin):
-#:       if hold_time:
-#:         hold_time = hold_time + 1 # sleep_time
-#:         datetime.datetime.now()
-#:       else:
-#:         hold_time = 1
-#:       #
-#:     else:
-#:       hold_time = 0
-#:     #
+    #:     #display.top_left_dot = GPIO.input(pin)
+    #:     #
+    #:     if GPIO.input(pin):
+    #:       if hold_time:
+    #:         hold_time = hold_time + 1 # sleep_time
+    #:         datetime.datetime.now()
+    #:       else:
+    #:         hold_time = 1
+    #:       #
+    #:     else:
+    #:       hold_time = 0
+    #:     #
 
     if hold_time:
       clock_str = '%02d%02d' % (0, hold_time)
@@ -171,10 +181,12 @@ while True:
       #
     #
     display.print(clock_str)
+    #
+    #print(clock_str)
 
-#:     if (hold_time >= treshhold_time):
-#:       os.system("halt")
-#:     #
+    #:     if (hold_time >= treshhold_time):
+    #:       os.system("halt")
+    #:     #
 
     #if second % 2:
     #    #sync = not sync
