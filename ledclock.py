@@ -8,6 +8,11 @@
 # install on Debian:
 # sudo apt install -y python3-pip python3-smbus 
 # pip3 install adafruit-circuitpython-ht16k33
+# sudo pip3 install adafruit-circuitpython-ht16k33 --break-system-packages
+#
+# https://forums.raspberrypi.com/viewtopic.php?t=361218  <== Pi 5 Python RuntimeError: Cannot determine SOC peripheral base address
+# "RPi.GPIO, wiringPI, and pigpio do not work on the Pi5 which has new hardware for the GPIO."
+# sudo apt install --reinstall python3-lgpio   
 
 # https://github.com/adafruit/Adafruit_CircuitPython_HT16K33
 # https://docs.circuitpython.org/projects/ht16k33/en/latest/
@@ -36,13 +41,14 @@ from adafruit_ht16k33 import segments
 import board
 import busio
 
-import RPi.GPIO as GPIO 
-GPIO.setmode(GPIO.BCM)
-pin = 9
-GPIO.setup(pin, GPIO.IN)
-#pin_str = "pin = {}".format(12.0)
-#pin_str = "pin = {}".format(GPIO.input(pin))
-#print (pin_str)
+# d250306 disabled because [] gives error and [] no mention of this in: https://github.com/adafruit/Adafruit_CircuitPython_HT16K33
+#: import RPi.GPIO as GPIO 
+#: GPIO.setmode(GPIO.BCM)
+#: pin = 9
+#: GPIO.setup(pin, GPIO.IN)
+#: #pin_str = "pin = {}".format(12.0)
+#: #pin_str = "pin = {}".format(GPIO.input(pin))
+#: #print (pin_str)
 
 # Create the I2C interface.
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -107,15 +113,15 @@ def read_bstep() -> int:
 bstep = read_bstep()
 set_brightness(bstep)
 
-import os
-import subprocess
-command = "./ntpq-print-offset.sh"
-def ntpsync() -> bool:
-    #res = os.system(command)
-    result_str = subprocess.check_output(command)
-    result_float = float(result_str)
-    return (result_float < 1000)
-#
+#: import os
+#: import subprocess
+#: command = "./ntpq-print-offset.sh"
+#: def ntpsync() -> bool:
+#:     #res = os.system(command)
+#:     result_str = subprocess.check_output(command)
+#:     result_float = float(result_str)
+#:     return (result_float < 1000)
+#: #
 sync = False
 #sync = ntpsync()
 hold_time = 0
@@ -139,18 +145,18 @@ while True:
     #display.print(clock)
 
 
-    #display.top_left_dot = GPIO.input(pin)
-    #
-    if GPIO.input(pin):
-      if hold_time:
-        hold_time = hold_time + 1 # sleep_time
-        datetime.datetime.now()
-      else:
-        hold_time = 1
-      #
-    else:
-      hold_time = 0
-    #
+#:     #display.top_left_dot = GPIO.input(pin)
+#:     #
+#:     if GPIO.input(pin):
+#:       if hold_time:
+#:         hold_time = hold_time + 1 # sleep_time
+#:         datetime.datetime.now()
+#:       else:
+#:         hold_time = 1
+#:       #
+#:     else:
+#:       hold_time = 0
+#:     #
 
     if hold_time:
       clock_str = '%02d%02d' % (0, hold_time)
@@ -166,9 +172,9 @@ while True:
     #
     display.print(clock_str)
 
-    if (hold_time >= treshhold_time):
-      os.system("halt")
-    #
+#:     if (hold_time >= treshhold_time):
+#:       os.system("halt")
+#:     #
 
     #if second % 2:
     #    #sync = not sync
