@@ -1,4 +1,10 @@
 #!/bin/bash
-#sudo /home/jdg/prod/ledclock/sevensegment_clock.py 
+#
+/usr/bin/logger "ledclock.sh START"
+#
 sudo /home/jdg/prod/ledclock/ledclock.py 
-#-EOF
+#
+/usr/bin/logger "ledclock.sh END (really, after crash of Python script)"
+#
+#-eof
+

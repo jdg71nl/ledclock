@@ -1,10 +1,10 @@
 #!/bin/bash
-#= check_restart_cron.sh
+#= ledclock__check_restart.sh
 # (c)202% John@de-Graaff.net
 #
 
 
-## JDG-NOTE: also copy this file (see inside for instructions): ./check_restart_cron.cron
+## JDG-NOTE: also copy this file (see inside for instructions): ./ledclock__check_restart.cron
 
 
 # display every line executed in this bash script:
@@ -40,8 +40,9 @@ then
   echo "# 'ps --pid' says: RUNNING "
 else
   echo "# 'ps --pid' says: ABSENT "
-  echo "$DATE check_restart_cron.sh restarting ..." >> $LOGFILE
   /usr/sbin/service ledclock restart
+  echo "$DATE ledclock__check_restart.sh restarting ..." >> $LOGFILE
+  /usr/bin/logger "ledclock__check_restart.sh found: PID = ABSENT (restarting)"
 fi
 #
 exit 0

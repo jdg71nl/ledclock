@@ -6,8 +6,8 @@
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: TokenMe Microntroller Manager (python-deamon)
-# Description:       TokenMe Microntroller Manager (python-deamon)
+# Short-Description: LEDCLOCK (python-deamon)
+# Description:       LEDCLOCK (python-deamon)
 ### END INIT INFO
 
 # this script example from:
@@ -18,7 +18,7 @@
 # /home/jdg/prod/ledclock/ledclock.py
 # sudo /etc/init.d/ledclock stop
 # sudo update-rc.d ledclock remove
-# sudo cp -a /home/jdg/prod/ledclock/ledclock.init.sh /etc/init.d/ledclock
+# sudo cp -av /home/jdg/prod/ledclock/ledclock.init.sh /etc/init.d/ledclock
 # sudo update-rc.d ledclock defaults
 # sudo /etc/init.d/ledclock start
 
@@ -30,8 +30,8 @@ HOME=/home/jdg/prod/ledclock
 #
 # DAEMON=$HOME/ledclock.py
 #DAEMON=$HOME/sevensegment_clock.py
-#DAEMON=$HOME/ledclock.sh
-DAEMON=$HOME/ledclock.py
+DAEMON=$HOME/ledclock.sh
+#DAEMON=$HOME/ledclock.py
 #
 DAEMON_NAME=ledclock
 

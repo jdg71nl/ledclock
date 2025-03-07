@@ -1,8 +1,8 @@
-#= /etc/cron.d/check_restart_cron.cron
+#= /etc/cron.d/ledclock__check_restart.cron
 
-# > sudo cp -av /home/jdg/prod/ledclock/check_restart_cron.cron  /etc/cron.d/
-# > sudo chown 0.0 /etc/cron.d/check_restart_cron.cron 
-# > sudo chmod 644 /etc/cron.d/check_restart_cron.cron 
+# > sudo cp -av /home/jdg/prod/ledclock/ledclock__check_restart.cron  /etc/cron.d/ledclock__check_restart  # <== NOTE: no .dots. allowed in name !!
+# > sudo chown 0.0 /etc/cron.d/ledclock__check_restart
+# > sudo chmod 644 /etc/cron.d/ledclock__check_restart
 # > sudo service cron reload 
 
 # Example of job definition:
@@ -18,8 +18,9 @@
 # every 5 minutes:
 #*/5    *  *  *  * root      /home/jdg/sudo_check_cycle_wlan0.sh
 # every 1 minute;
-*      *  *  *  * root      /home/jdg/prod/ledclock/check_restart_cron.sh
+*      *  *  *  * root      /home/jdg/prod/ledclock/ledclock__check_restart.sh
 
+# d250307 JDG-Note: nope, we don't need this '-l' (LSB names) setting:
 # jdg: also need this setting:
 # > cat /etc/default/cron | egrep ^EXTRA_OPTS
 # EXTRA_OPTS='-l'  
