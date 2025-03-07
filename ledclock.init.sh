@@ -30,8 +30,9 @@ HOME=/home/jdg/prod/ledclock
 #
 # DAEMON=$HOME/ledclock.py
 #DAEMON=$HOME/sevensegment_clock.py
-DAEMON=$HOME/ledclock.sh
-#DAEMON=$HOME/ledclock.py
+# d250307 JDG-Note: why don't we ca;; .sh ? because we need the direct process as PID !
+#DAEMON=$HOME/ledclock.sh
+DAEMON=$HOME/ledclock.py
 #
 DAEMON_NAME=ledclock
 
