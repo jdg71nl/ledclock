@@ -1,7 +1,7 @@
 #= /etc/cron.d/ledclock__check_restart.cron
 
-# > sudo cp -av /home/jdg/prod/ledclock/ledclock__check_restart.cron  /etc/cron.d/ledclock__check_restart  # <== NOTE: no .dots. allowed in name !!
-# > sudo chown 0.0 /etc/cron.d/ledclock__check_restart
+# > sudo cp -v /home/jdg/prod/ledclock/ledclock__check_restart.cron  /etc/cron.d/ledclock__check_restart  # <== NOTE: no .dots. allowed in name !!
+# > sudo chown 0:0 /etc/cron.d/ledclock__check_restart
 # > sudo chmod 644 /etc/cron.d/ledclock__check_restart
 # > sudo service cron reload 
 
